@@ -1,0 +1,29 @@
+.image-icon{
+    margin: 10px;
+    width: 75px;
+    height: 75px;
+}
+
+.contact-row{
+    margin: 10px;
+    border-radius: 2px;
+    border: 1px #00a0df;
+}
+
+.nameLbl{
+    margin-top: 33px;
+    margin-left: 10px;
+    font-size: 20px;
+    position: relative;
+}
+
+.search-bar{
+    margin: 10px;
+}
+
+.call-btn{
+    margin-top: 33px;
+    margin-left: 10px;
+    position: relative;
+    top: 30px;
+}
