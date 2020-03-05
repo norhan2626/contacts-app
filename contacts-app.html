@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+  <section data-role="page" id="pageone">
+    <div data-role="header">
+      <h1 id="userName"></h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+      <p>Welcome!</p>
+      <a href="#pagethree">Go to Dialog Page</a>
+      <br>
+      <br>
+      <br>
+      <img src="user.png" width="50%" height="50%" alt="user">
+      <a href="index.html" data-role="button" data-icon="delete" style="width:50px ;color:red;">Delete</a>
+      <a href="index.html" data-role="button" data-icon="edit" style="width:10% ;position:relative; top:-53px;left:130px;">Edit</a>
+      <a href="tel:+15555555555" data-role="button" data-icon="phone" style="width:10% ;position:relative; top:-105px;left:250px;">Call</a>
+
+
+    </div>
+
+    <div data-role="footer">
+      <h1>Contact List</h1>
+    </div>
+  </section>
+
+  <section data-role="page" data-dialog="true" id="pagetwo" data-add-back-btn="true">
+
+
+    <div data-role="main" class="ui-content">
+      <h3>Delete Contact?</h3>
+      <a href="#firstPage  " data-role="button" class="delete" style="width:30% ;color:red;"> Delete</a> <a href="#pageone "
+        data-role="button" style="width:30% ;position:relative; top:-53px;left:160px;"> Cancel</a>
+
+    </div>
+
+  </section>
+  <section data-role="page" data-dialog="true" id="pagethree" data-add-back-btn="true">
+    <a href="#pageone">Go to Pageone</a>
+    <a href="#pagetwo">Go to Pagetwo</a>
+    <header data-role="header">
+      <h1> New Contact</h1>
+    </header>
+    <br>
+
+    <div class="ui-field-contain">
+      <label for="textinput-1">Name</label>
+      <input type="text" name="textinput-1" id="name" placeholder="" value="">
+      <label id="error" style="color:red;"></label>
+    </div>
+    <div class="ui-field-contain">
+      <label for="textinput-1">Phone</label>
+      <input type="text" name="textinput-1" id="phone" placeholder="01*********" value="">
+      <label id="error1" style="color:red;"></label>
+    </div>
+    <div class="ui-field-contain">
+      <label for="textinput-1">Email</label>
+      <input type="text" name="textinput-1" id="email" placeholder="name@gmail.com" value="">
+      <label id="error2" style="color:red;"></label>
+    </div>
+    <div class="ui-field-contain">
+      <label for="flip-1">Gender:</label>
+      <select name="flip-1" id="flip-1" data-role="slider">
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+    </select>
+    </div>
+    <a href="" data-role="button" onclick="validate()" data-icon="check" class="rigth" id="addMe" style="width:30% ;color:greenyellow;"> Save</a>
+    <a href="#pageone" data-icon="delete" data-role="button" style="width:30% ;position:relative; top:-53px;left:160px;"> Cancel</a>
+
+  </section>
+
+  <script>
+    $(".delete").click(function () {
+      $("#node").remove();
+    });
+    $(document).ready(function () {
+      $("img").click(function () {
+        // Change src attribute of image
+        $(this).attr("src", "unnamed.png");
+      });
+    });
+    function validate() {
+      var phoneNumber = document.getElementById('phone').value;
+      //   var postalCode = document.getElementById('postal-code').value;
+      var emailCode = document.getElementById('email').value;
+      username = document.getElementById("name").value;
+      var phoneRGEX = /^(01){1}\d{9}/;
+
+      var emailRGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      var phoneResult = phoneRGEX.test(phoneNumber);
+
+      var emailResult = emailRGEX.test(emailCode);
+      if (username == "") {
+        document.getElementById("error").innerHTML = "Please enter  valid Name";
+
+      }
+      // if (!username == "") {
+      //   document.getElementById("error").innerHTML = "";
+
+      // }
+
+      if (phoneResult == false) {
+        document.getElementById("error1").innerHTML = "Please enter valid number";
+      }
+      // if (phoneResult == true) {
+      //   document.getElementById("error1").innerHTML = "";
+      // }
+      if (emailResult == false) {
+        document.getElementById("error2").innerHTML = "Please enter valid email";
+      }
+      // if (emailResult == true) {
+      //   document.getElementById("error2").innerHTML = "";
+      // }
+      else {
+window.location.href='#pageone';
+
+      }
+    }
+  </script>
+</body>
+
+</html>
