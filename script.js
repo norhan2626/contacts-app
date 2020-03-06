@@ -111,7 +111,28 @@ function start() {
         // console.log("username"+userName);
         // $("#user-image").attr("src", imagesrc);
     });
+
     console.log(document.getElementById("contacts-list"));
+}
+
+function edit() {
+
+    selectedId = this.id;
+    console.log("selectedid: " + selectedId);
+    window.location.href = "#newContact";
+    var contact = JSON.parse(localStorage.getItem("contacts"))[selectedId.substr(selectedId.indexOf("id") + 2)];
+    console.log(contact + "here in edit");
+    tel = document.getElementById("tel-anchor");
+    tel.href = "tel:+" + contact.phone;
+    editUser = document.getElementById("editUser");
+    editUser.href = "#newContact";
+    newName = document.getElementById("newName").innerHtml = contact.name;
+
+    newEmail = document.getElementById("newEmail").innerHTML = contact.email;
+    //gender=document.getElementById("newEmail").innerHTML=contact.gender;
+    newPhone = document.getElementById("newEmail").innerHTML = contact.phone;
+
+
 }
 
 function Contact(name, phone, email, gender) {
