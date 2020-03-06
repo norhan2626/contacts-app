@@ -1,8 +1,10 @@
 var selectedId;
+
 function getSelectedId() {
     return selectedId;
 }
-function filterContacts(){
+
+function filterContacts() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("input");
     filter = input.value.toUpperCase();
@@ -10,7 +12,7 @@ function filterContacts(){
     li = ul.getElementsByTagName('li');
     console.log("filter: " + filter);
     // Loop through all list items, and hide those who don't match the search query
-    if(filter.length>0) {
+    if (filter.length > 0) {
         for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByClassName("nameLbl")[0];
             txtValue = a.innerText;
@@ -20,8 +22,7 @@ function filterContacts(){
                 li[i].style.display = "none";
             }
         }
-    }
-    else{
+    } else {
         for (i = 0; i < li.length; i++) {
             li[i].style.display = "";
         }
@@ -31,16 +32,16 @@ function filterContacts(){
 function displayContact(id, contact) {
     console.log(contact);
     var contactRow = document.createElement("li");
-    contactRow.setAttribute("class","row contact-row");
-    contactRow.setAttribute("id","id"+id);
-    contactRow.setAttribute("href","")
+    contactRow.setAttribute("class", "row contact-row");
+    contactRow.setAttribute("id", "id" + id);
+    contactRow.setAttribute("href", "")
 
     var imageIcon = document.createElement("img");
     imageIcon.className = "image-icon";
-    if(contact.gender==="female")
-        imageIcon.setAttribute("src","female.png");
+    if (contact.gender === "female")
+        imageIcon.setAttribute("src", "female.png");
     else
-        imageIcon.setAttribute("src","male.png");
+        imageIcon.setAttribute("src", "male.png");
     contactRow.appendChild(imageIcon);
 
     var name = document.createElement("div");
@@ -50,10 +51,10 @@ function displayContact(id, contact) {
 
     //<a data-role="button" data-icon="plus"> Add </a>
     var callBtn = document.createElement("a");
-    callBtn.setAttribute("class","call-btn");
+    callBtn.setAttribute("class", "call-btn");
     //callBtn.setAttribute("data-role","button");
-    callBtn.setAttribute("href","tel:"+contact.phone);
-    callBtn.setAttribute("data-icon","phone");
+    callBtn.setAttribute("href", "tel:" + contact.phone);
+    callBtn.setAttribute("data-icon", "phone");
     contactRow.appendChild(callBtn);
 
     console.log(contactRow);
@@ -75,25 +76,40 @@ function getBase64Image(img) {
 
 function start() {
     var image = document.createElement("img");
-    image.setAttribute("src","male.png");
+    image.setAttribute("src", "male.png");
     //
-    var persons = [new Contact("Martina","0122","123@def.com","female"),
-        new Contact("Sally","0122","123@def.com","female"),
-        new Contact("Zenda","0122","123@def.com","female")];
-    localStorage.setItem("contacts",JSON.stringify(persons));
+    var persons = [new Contact("Martina", "0122", "123@def.com", "female"),
+        new Contact("Sally", "0122", "123@def.com", "female"),
+        new Contact("Zenda", "0122", "123@def.com", "female")];
+    localStorage.setItem("contacts", JSON.stringify(persons));
 
     var contactsList = JSON.parse(localStorage.getItem("contacts"));
-    for(var i = 0; i<contactsList.length; i++){
-        displayContact(i,contactsList[i]);
+    for (var i = 0; i < contactsList.length; i++) {
+        displayContact(i, contactsList[i]);
     }
-    $("#contacts-list li").click(function() {
+    $("#contacts-list li").click(function () {
         selectedId = this.id;
-        console.log("selectedid: "+selectedId);
-        window.location.href = "#pageone";
-        var contact = JSON.parse(localStorage.getItem("contacts"))[selectedId.substr(selectedId.indexOf("id")+2)];
+        console.log("selectedid: " + selectedId);
+        window.location.href = "#contactInfo";
+        var contact = JSON.parse(localStorage.getItem("contacts"))[selectedId.substr(selectedId.indexOf("id") + 2)];
         console.log(contact);
+        console.log(contact.phone);
+        userName = document.getElementById("userNameHeader").innerHTML = contact.name;
+        tel = document.getElementById("tel-anchor");
+        tel.href = "tel:+" + contact.phone;
+        editUser = document.getElementById("editUser");
+        editUser.href = "#newContact";
+        //   newName=document.getElementById("newName").value;
+        // newName.placeholder="contact.name";
+        //console.log(newName.placeholder+"here");
+        //console.log(newName+"name");
+        //newEmail=document.getElementById("newEmail").innerHTML=contact.email;
+        //gender=document.getElementById("newEmail").innerHTML=contact.gender;
 
-        $("#user-image").attr("src",imagesrc);
+
+        //    console.log(tel.href);
+        // console.log("username"+userName);
+        // $("#user-image").attr("src", imagesrc);
     });
     console.log(document.getElementById("contacts-list"));
 }
