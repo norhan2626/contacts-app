@@ -61,7 +61,7 @@ function displayContact(id, contact) {
     document.getElementById("contacts-list").appendChild(contactRow);
 }
 
-function getBase64Image(img) {
+/*function getBase64Image(img) {
     var canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
@@ -72,7 +72,7 @@ function getBase64Image(img) {
     var dataURL = canvas.toDataURL("image/png");
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
+}*/
 
 function start() {
     var image = document.createElement("img");
@@ -116,17 +116,14 @@ function start() {
 }
 
 function edit() {
-
     console.log("selectedid: " + selectedId);
     window.location.href = "#newContact";
     var contact = JSON.parse(localStorage.getItem("contacts"))[selectedId.substr(selectedId.indexOf("id") + 2)];
     console.log(contact + "here in edit");
     newName = document.getElementById("newName").innerHtml = contact.name;
-
     newEmail = document.getElementById("newEmail").innerHTML = contact.email;
     //gender=document.getElementById("newEmail").innerHTML=contact.gender;
     newPhone = document.getElementById("newEmail").innerHTML = contact.phone;
-
 
 }
 

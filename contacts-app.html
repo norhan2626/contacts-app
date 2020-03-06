@@ -13,7 +13,7 @@
 <section data-role="page" id="contact-list">
     <header data-role="header">
         <h1>Contact List</h1>
-        <a data-icon="plus" data-role="button">Add</a>
+        <a data-icon="plus" data-role="button" href="#newContact">Add</a>
     </header>
 
     <article data-role="content">
@@ -41,7 +41,6 @@
         <a data-icon="back" data-role="button" href="#contact-list">back</a>
         <h1 id="userNameHeader"></h1>
     </div>
-
     <div data-role="main" class="ui-content">
         <p>Welcome!</p>
         <a href="#newContact">Go to Add New Page</a>
@@ -55,24 +54,21 @@
         <a data-icon="phone" data-role="button" href="" id="tel-anchor"
            style="width:10% ;position:relative; top:-105px;left:250px;">Call</a>
     </div>
-
     <div data-role="footer">
         <h1>Contact List</h1>
     </div>
 </section>
 
 <section data-add-back-btn="true" data-dialog="true" data-role="page" id="deletePage">
-
-
     <div data-role="main" class="ui-content">
         <h3>Delete Contact?</h3>
         <a class="delete" data-role="button" href="#contact-list " style="width:30% ;color:red;"> Delete</a>
         <a data-role="button" href="#contact-list " style="width:30% ;position:relative; top:-53px;left:160px;">
-            Cancel</a>
-
+            Cancel
+        </a>
     </div>
-
 </section>
+
 <section data-add-back-btn="true" data-dialog="true" data-role="page" id="newContact">
     <a href="#contactInfo">Go to contactInfo</a>
     <a href="#deletePage">Go to deletePage</a>
