@@ -13,7 +13,7 @@
 <section data-role="page" id="contact-list">
     <header data-role="header">
         <h1>Contact List</h1>
-        <a data-role="button" data-icon="plus">Add</a>
+        <a data-icon="plus" data-role="button">Add</a>
     </header>
 
     <article data-role="content">
@@ -36,22 +36,23 @@
     start();
 </script>
 
-<section data-role="page" id="pageone">
+<section data-role="page" id="contactInfo">
     <div data-role="header">
-        <h1 id="userName"></h1>
+        <a data-icon="back" data-role="button" href="#contact-list">back</a>
+        <h1 id="userNameHeader"></h1>
     </div>
 
     <div data-role="main" class="ui-content">
         <p>Welcome!</p>
-        <a href="#pagethree">Go to Dialog Page</a>
+        <a href="#newContact">Go to Add New Page</a>
         <br>
         <br>
         <br>
         <img id="user-image" src="male.png" width="50%" height="50%" alt="user">
-        <a href="index.html" data-role="button" data-icon="delete" style="width:50px ;color:red;">Delete</a>
-        <a href="index.html" data-role="button" data-icon="edit"
+        <a data-icon="delete" data-role="button" href="#contact-list" style="width:50px ;color:red;">Delete</a>
+        <a data-icon="edit" data-role="button" href="" id="editUser"
            style="width:10% ;position:relative; top:-53px;left:130px;">Edit</a>
-        <a id="tel-anchor" href="tel:+15555555555" data-role="button" data-icon="phone"
+        <a data-icon="phone" data-role="button" href="" id="tel-anchor"
            style="width:10% ;position:relative; top:-105px;left:250px;">Call</a>
     </div>
 
@@ -60,51 +61,51 @@
     </div>
 </section>
 
-<section data-role="page" data-dialog="true" id="pagetwo" data-add-back-btn="true">
+<section data-add-back-btn="true" data-dialog="true" data-role="page" id="deletePage">
 
 
     <div data-role="main" class="ui-content">
         <h3>Delete Contact?</h3>
-        <a href="#firstPage  " data-role="button" class="delete" style="width:30% ;color:red;"> Delete</a> <a
-            href="#pageone "
-            data-role="button" style="width:30% ;position:relative; top:-53px;left:160px;"> Cancel</a>
+        <a class="delete" data-role="button" href="#contact-list " style="width:30% ;color:red;"> Delete</a>
+        <a data-role="button" href="#contact-list " style="width:30% ;position:relative; top:-53px;left:160px;">
+            Cancel</a>
 
     </div>
 
 </section>
-<section data-role="page" data-dialog="true" id="pagethree" data-add-back-btn="true">
-    <a href="#pageone">Go to Pageone</a>
-    <a href="#pagetwo">Go to Pagetwo</a>
+<section data-add-back-btn="true" data-dialog="true" data-role="page" id="newContact">
+    <a href="#contactInfo">Go to contactInfo</a>
+    <a href="#deletePage">Go to deletePage</a>
     <header data-role="header">
         <h1> New Contact</h1>
     </header>
     <br>
 
     <div class="ui-field-contain">
-        <label for="name">Name</label>
-        <input type="text" name="textinput-1" id="name" placeholder="" value="">
+        <label for="newName">Name</label>
+        <input id="newName" name="textinput-1" placeholder="" type="text" value="">
         <label id="error" style="color:red;"></label>
     </div>
     <div class="ui-field-contain">
-        <label for="phone">Phone</label>
-        <input type="text" name="textinput-1" id="phone" placeholder="01*********" value="">
+        <label for="newPhone">Phone</label>
+        <input id="newPhone" name="textinput-1" placeholder="01*********" type="text" value="">
         <label id="error1" style="color:red;"></label>
     </div>
     <div class="ui-field-contain">
-        <label for="email">Email</label>
-        <input type="text" name="textinput-1" id="email" placeholder="name@gmail.com" value="">
+        <label for="newEmail">Email</label>
+        <input id="newEmail" name="textinput-1" placeholder="name@gmail.com" type="text" value="">
         <label id="error2" style="color:red;"></label>
     </div>
     <div class="ui-field-contain">
-        <label for="flip-1">Gender:</label>
-        <select name="flip-1" id="flip-1" data-role="slider">
+        <label for="gender">Gender:</label>
+        <select data-role="slider" id="gender" name="flip-1">
             <option value="Female">Female</option>
             <option value="Male">Male</option>
         </select>
     </div>
     <a href="" data-role="button" onclick="validate()" data-icon="check" class="rigth" id="addMe"
        style="width:30% ;color:greenyellow;"> Save</a>
-    <a href="#pageone" data-icon="delete" data-role="button"
+    <a data-icon="delete" data-role="button" href="#contactInfo"
        style="width:30% ;position:relative; top:-53px;left:160px;"> Cancel</a>
 
 </section>
