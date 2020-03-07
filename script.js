@@ -5,6 +5,7 @@ function getSelectedId() {
     return selectedId;
 }
 
+/*
 function filterContacts() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("input");
@@ -29,13 +30,26 @@ function filterContacts() {
         }
     }
 }
+*/
+
+function sorter(a, b) {
+    if (a.name > b.name) {
+        return 1;
+    }
+    if (b.name > a.name) {
+        return -1;
+    }
+    return 0;
+}
 
 function displayContact(id, contact) {
     console.log(contact);
     var contactRow = document.createElement("li");
     contactRow.setAttribute("class", "row contact-row");
     contactRow.setAttribute("id", "id" + id);
-    contactRow.setAttribute("href", "")
+
+    var a = document.createElement("a");
+    contactRow.appendChild(a);
 
     var imageIcon = document.createElement("img");
     imageIcon.setAttribute("class","image-icon");
@@ -43,20 +57,21 @@ function displayContact(id, contact) {
         imageIcon.setAttribute("src", "female.png");
     else
         imageIcon.setAttribute("src", "male.png");
-    contactRow.appendChild(imageIcon);
+    a.appendChild(imageIcon);
 
-    var name = document.createElement("div");
-    name.className = "nameLbl";
+    var name = document.createElement("h2");
+    name.setAttribute("class","nameLbl");
     name.innerText = contact.name;
-    contactRow.appendChild(name)
+    a.appendChild(name)
 
     //<a data-role="button" data-icon="plus"> Add </a>
     var callBtn = document.createElement("a");
-    callBtn.setAttribute("class", "call-btn");
-    //callBtn.setAttribute("data-role","button");
+    callBtn.setAttribute("class", "ui-btn ui-btn-right");
+    callBtn.setAttribute("data-role","button");
     callBtn.setAttribute("href", "tel:" + contact.phone);
     callBtn.setAttribute("data-icon", "phone");
-    contactRow.appendChild(callBtn);
+    callBtn.setAttribute("data-inline", "true");
+    a.appendChild(callBtn);
 
     console.log(contactRow);
     document.getElementById("contacts-list").appendChild(contactRow);
@@ -79,15 +94,17 @@ function start_app() {
     document.getElementById("contacts-list").innerHTML = "";
 
     var contactsList = JSON.parse(localStorage.getItem("contacts"));
+    console.log(contactsList);
     if(contactsList === null || contactsList === undefined){
         localStorage.setItem("contacts",JSON.stringify([]));
     }
     else {
         for (var i = 0; i < contactsList.length; i++) {
-            displayContact(i, contactsList[i]);
+            if(contactsList[i]!=null)
+                displayContact(i, contactsList[i]);
         }
         $(".nameLbl").click(function () {
-            selectedId = this.parentElement.id.substr(this.parentElement.id.indexOf("id") + 2);
+            selectedId = this.parentElement.parentElement.id.substr(this.parentElement.parentElement.id.indexOf("id") + 2);
             console.log("selectedid: " + selectedId);
             window.location.href = "#contactInfo";
 
@@ -98,7 +115,8 @@ function start_app() {
             tel = document.getElementById("tel-anchor");
             tel.href = "tel:+" + contact.phone;
 
-            $("#editHeader").innerText = "New Contact";
+            //document.getElementById("editHeader").innerHTML = "Edit Contact";
+
         });
     }
 
@@ -108,15 +126,16 @@ function start_app() {
    editUser = document.getElementById("editUser");
     editUser.href = "#newContact";
 */
-    $(".delete").click(function () {
+    /*$(".delete").click(function () {
         $("#node").remove();
     });
     $(document).ready(function () {
         $("img").click(function () {
             $(this).attr("src", "image.png");
         });
-    });
+    });*/
 }
+
 
 function edit() {
     isNew = false;
@@ -131,7 +150,7 @@ function edit() {
     var newPhone = document.getElementById("newPhone").value = contact.phone;
     var newGender=document.getElementById("newGender").value = contact.gender;
 
-    $("#editHeader").innerText = "Edit Contact";
+    $("#editHeader").html("Edit Contact");
 }
 
 function Contact(name, phone, email, gender) {
@@ -192,11 +211,14 @@ function save(){
         isNew = true;
         delete contactsArray[index];
         contactsArray[index] = contact;
+        contactsArray.sort(sorter);
         console.log(contactsArray);
         localStorage.setItem("contacts",JSON.stringify(contactsArray));
-        //window.location.replace("#pageone");
-        window.location.href = "#pageone";
+        window.location.href = "#contact-list";
+        $("#editHeader").html("New Contact");
+
         //window.history.back();
         start_app();
     }
 }
+

@@ -7,6 +7,8 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -18,9 +20,10 @@
 
     <article data-role="content">
         <div id="contacts-view">
-            <input id="input" class="search-bar" type="text" placeholder="Search" onkeyup="filterContacts()">
-            <br>
-            <ul id="contacts-list" data-role="listview">
+            <!--<input id="input" class="search-bar" type="text" placeholder="Search" onkeyup="filterContacts()">
+            <br>-->
+            <ul id="contacts-list" data-role="listview" data-filter="true" data-inset="true" data-autodividers="true"
+                data-icon ="phone" data-split-icon="phone" data-split-theme="a">
 
             </ul>
         </div>
@@ -44,7 +47,7 @@
         <br>
         <br>
         <img id="user-image" src="male.png" width="50%" height="50%" alt="user">
-        <a data-icon="delete" data-role="button" href="#contact-list" style="width:50px ;color:red;">Delete</a>
+        <a data-icon="delete" data-role="button" href="#deletePage" style="width:50px ;color:red;">Delete</a>
         <a data-icon="edit" data-role="button" id="editUser" onclick="edit()"
            style="width:10% ;position:relative; top:-53px;left:130px;">Edit</a>
         <a data-icon="phone" data-role="button" href="" id="tel-anchor"
@@ -58,7 +61,7 @@
 <section data-add-back-btn="true" data-dialog="true" data-role="page" id="deletePage">
     <div data-role="main" class="ui-content">
         <h3>Delete Contact?</h3>
-        <a class="delete" data-role="button" href="#contact-list " style="width:30% ;color:red;"> Delete</a>
+        <a class="delete" data-role="button" style="width:30% ;color:red;" onclick="deleteContact()"> Delete</a>
         <a data-role="button" href="#contact-list " style="width:30% ;position:relative; top:-53px;left:160px;">
             Cancel
         </a>
@@ -98,7 +101,7 @@
         </select>
     </div>
 
-    <a href="" data-role="button" onclick="save()" data-icon="check" class="rigth" id="addMe"
+    <a data-role="button" onclick="save()" data-icon="check" class="rigth" id="addMe"
        style="width:30% ;color:greenyellow;">
         Save
     </a>
