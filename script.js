@@ -136,6 +136,15 @@ function start_app() {
     });*/
 }
 
+function deleteContact() {
+    console.log("selectedid: " + selectedId);
+    var contacts = JSON.parse(localStorage.getItem("contacts"));
+    delete contacts[selectedId];
+    console.log(contacts);
+    localStorage.setItem("contacts",JSON.stringify(contacts));
+    window.location.href = "#contact-list";
+    start_app();
+}
 
 function edit() {
     isNew = false;
