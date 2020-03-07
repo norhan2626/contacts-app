@@ -32,10 +32,6 @@
 
 </section>
 
-<script>
-    start();
-</script>
-
 <section data-role="page" id="contactInfo">
     <div data-role="header">
         <a data-icon="back" data-role="button" href="#contact-list">back</a>
@@ -49,7 +45,7 @@
         <br>
         <img id="user-image" src="male.png" width="50%" height="50%" alt="user">
         <a data-icon="delete" data-role="button" href="#contact-list" style="width:50px ;color:red;">Delete</a>
-        <a data-icon="edit" data-role="button" href="" id="editUser" onclick="edit()"
+        <a data-icon="edit" data-role="button" id="editUser" onclick="edit()"
            style="width:10% ;position:relative; top:-53px;left:130px;">Edit</a>
         <a data-icon="phone" data-role="button" href="" id="tel-anchor"
            style="width:10% ;position:relative; top:-105px;left:250px;">Call</a>
@@ -70,6 +66,7 @@
 </section>
 
 <section data-add-back-btn="true" data-dialog="true" data-role="page" id="newContact">
+
     <a href="#contactInfo">Go to contactInfo</a>
     <a href="#deletePage">Go to deletePage</a>
     <header data-role="header">
@@ -78,46 +75,44 @@
     <br>
 
     <div class="ui-field-contain">
-        <label for="newName">Name</label>
-        <input id="newName" name="textinput-1" placeholder="" type="text" value="">
+        <label for="newName">Name:</label>
+        <input id="newName" name="textinput-1" placeholder="" type="text">
         <label id="error" style="color:red;"></label>
     </div>
     <div class="ui-field-contain">
-        <label for="newPhone">Phone</label>
-        <input id="newPhone" name="textinput-1" placeholder="01*********" type="text" value="">
+        <label for="newPhone">Phone:</label>
+        <input id="newPhone" name="textinput-1" placeholder="01*********" type="text">
         <label id="error1" style="color:red;"></label>
     </div>
     <div class="ui-field-contain">
-        <label for="newEmail">Email</label>
-        <input id="newEmail" name="textinput-1" placeholder="name@gmail.com" type="text" value="">
+        <label for="newEmail">Email:</label>
+        <input id="newEmail" name="textinput-1" placeholder="name@gmail.com" type="text">
         <label id="error2" style="color:red;"></label>
     </div>
+
     <div class="ui-field-contain">
-        <label for="gender">Gender:</label>
-        <select data-role="slider" id="gender" name="flip-1">
-            <option value="Female">Female</option>
-            <option value="Male">Male</option>
+        <label for="newGender">Gender:</label>
+        <select data-role="slider" id="newGender" name="flip-1">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
         </select>
     </div>
+
     <a href="" data-role="button" onclick="validate()" data-icon="check" class="rigth" id="addMe"
-       style="width:30% ;color:greenyellow;"> Save</a>
+       style="width:30% ;color:greenyellow;">
+        Save
+    </a>
     <a data-icon="delete" data-role="button" href="#contactInfo"
-       style="width:30% ;position:relative; top:-53px;left:160px;"> Cancel</a>
+       style="width:30% ;position:relative; top:-53px;left:160px;">
+        Cancel
+    </a>
 
 </section>
 
 <script>
-    $(".delete").click(function () {
-        $("#node").remove();
-    });
-    $(document).ready(function () {
-        $("img").click(function () {
-            // Change src attribute of image
-            $(this).attr("src", "image.png");
-        });
-    });
-
+    start_app();
 </script>
+
 </body>
 
 </html>
