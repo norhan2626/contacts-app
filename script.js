@@ -1,4 +1,5 @@
 var selectedId;
+var isNew = true;
 
 function getSelectedId() {
     return selectedId;
@@ -37,7 +38,7 @@ function displayContact(id, contact) {
     contactRow.setAttribute("href", "")
 
     var imageIcon = document.createElement("img");
-    imageIcon.className = "image-icon";
+    imageIcon.setAttribute("class","image-icon");
     if (contact.gender === "female")
         imageIcon.setAttribute("src", "female.png");
     else
@@ -75,43 +76,31 @@ function displayContact(id, contact) {
 }*/
 
 function start_app() {
-    var image = document.createElement("img");
-    image.setAttribute("src", "male.png");
-    //
-    /*var persons = [new Contact("Martina", "0122", "123@def.com", "female"),
-        new Contact("Sally", "0122", "123@def.com", "female"),
-        new Contact("Zenda", "0122", "123@def.com", "female")];
-    localStorage.setItem("contacts", JSON.stringify(persons));*/
+    document.getElementById("contacts-list").innerHTML = "";
 
     var contactsList = JSON.parse(localStorage.getItem("contacts"));
-	document.getElementById("contacts-list").innerHTML = "";
-    for (var i = 0; i < contactsList.length; i++) {
-        displayContact(i, contactsList[i]);
-        displayContact(i, contactsList[i]);
+    if(contactsList === null || contactsList === undefined){
+        localStorage.setItem("contacts",JSON.stringify([]));
     }
-    $(".nameLbl").click(function () {
-        selectedId = this.parentElement.id.substr(this.parentElement.id.indexOf("id")+2);
-        console.log("selectedid: " + selectedId);
-        window.location.href = "#contactInfo";
+    else {
+        for (var i = 0; i < contactsList.length; i++) {
+            displayContact(i, contactsList[i]);
+        }
+        $(".nameLbl").click(function () {
+            selectedId = this.parentElement.id.substr(this.parentElement.id.indexOf("id") + 2);
+            console.log("selectedid: " + selectedId);
+            window.location.href = "#contactInfo";
 
-        var contact = JSON.parse(localStorage.getItem("contacts"))[selectedId];
-        console.log(contact);
-        userName = document.getElementById("userNameHeader");
-        userName.innerHTML= contact.name;
-        tel = document.getElementById("tel-anchor");
-        tel.href = "tel:+" + contact.phone;
+            var contact = JSON.parse(localStorage.getItem("contacts"))[selectedId];
+            console.log(contact);
+            userName = document.getElementById("userNameHeader");
+            userName.innerHTML = contact.name;
+            tel = document.getElementById("tel-anchor");
+            tel.href = "tel:+" + contact.phone;
 
-        // newName=document.getElementById("newName").value;
-        // newName.placeholder="contact.name";
-        // console.log(newName.placeholder+"here");
-        // console.log(newName+"name");
-        // newEmail=document.getElementById("newEmail").innerHTML=contact.email;
-        // gender=document.getElementById("newEmail").innerHTML=contact.gender;
-
-        // console.log(tel.href);
-        // console.log("username"+userName);
-        // $("#user-image").attr("src", imagesrc);
-    });
+            $("#editHeader").innerText = "New Contact";
+        });
+    }
 
     console.log(document.getElementById("contacts-list"));
 
@@ -130,14 +119,19 @@ function start_app() {
 }
 
 function edit() {
+    isNew = false;
     console.log("selectedid: " + selectedId);
     window.location.href = "#newContact";
-    var contact = JSON.parse(localStorage.getItem("contacts"))[selectedId];
+    var contacts = JSON.parse(localStorage.getItem("contacts"));
+    var contact = contacts[selectedId];
+
     console.log(contact + "here in edit");
-    newName = document.getElementById("newName").value = contact.name;
-    newEmail = document.getElementById("newEmail").value = contact.email;
-    newPhone = document.getElementById("newPhone").value = contact.phone;
-    gender=document.getElementById("newGender").value=contact.gender;
+    var newName = document.getElementById("newName").value = contact.name;
+    var newEmail = document.getElementById("newEmail").value = contact.email;
+    var newPhone = document.getElementById("newPhone").value = contact.phone;
+    var newGender=document.getElementById("newGender").value = contact.gender;
+
+    $("#editHeader").innerText = "Edit Contact";
 }
 
 function Contact(name, phone, email, gender) {
@@ -149,20 +143,16 @@ function Contact(name, phone, email, gender) {
     //this.photo = photo;
 }
 
-function validate() {
-    var phoneNumber = document.getElementById('newPhone').value;
-    var emailCode = document.getElementById('newEmail').value;
-    var username = document.getElementById("newName").value;
-    var gender = document.getElementById("newGender").value;
+function validate(userName, phoneNumber, emailCode) {
 
     var phoneRGEX = /^(01)(0|1|2|5)\d{8}/;
     var emailRGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    var usernameResult = username !== "";
+    var userNameResult = userName !== "";
     var phoneResult = phoneRGEX.test(phoneNumber);
     var emailResult = emailRGEX.test(emailCode);
 
-    if (usernameResult === false) {
+    if (userNameResult === false) {
         document.getElementById("error").innerHTML = "Please enter valid name";
     } else{
         document.getElementById("error").innerHTML = "";
@@ -180,14 +170,33 @@ function validate() {
         document.getElementById("error2").innerHTML = "";
     }
 
-    if (emailResult && phoneResult && usernameResult) {
-        var contact = new Contact(username, phoneNumber, emailCode, gender);
+    if (emailResult && phoneResult && userNameResult) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function save(){
+    var userName = document.getElementById("newName").value;
+    var phoneNumber = document.getElementById('newPhone').value;
+    var emailCode = document.getElementById('newEmail').value;
+    var gender = document.getElementById("newGender").value;
+
+    if(validate(userName, phoneNumber, emailCode)){
+        var contact = new Contact(userName, phoneNumber, emailCode, gender);
         console.log(contact);
         var contactsArray = JSON.parse(localStorage.getItem("contacts"));
-        contactsArray[contactsArray.length] = contact;
+        var index = isNew? contactsArray.length: selectedId;
+        isNew = true;
+        delete contactsArray[index];
+        contactsArray[index] = contact;
+        console.log(contactsArray);
         localStorage.setItem("contacts",JSON.stringify(contactsArray));
         //window.location.replace("#pageone");
-		start_app();
-
+        window.location.href = "#pageone";
+        //window.history.back();
+        start_app();
     }
 }
