@@ -114,7 +114,15 @@ function start_app() {
             userName.innerHTML = contact.name;
             tel = document.getElementById("tel-anchor");
             tel.href = "tel:+" + contact.phone;
+            console.log("gender" + contact.gender);
 
+
+            if (contact.gender == "female") {
+                document.getElementById("user-image").src = "female.png";
+
+            } else {
+                document.getElementById("user-image").src = "male.png";
+            }
             //document.getElementById("editHeader").innerHTML = "Edit Contact";
 
         });
