@@ -13,7 +13,7 @@
 
 <body>
 <section data-role="page" id="contact-list">
-    <header data-role="header">
+    <header data-role="header" style="background-color: bisque">
         <h1>Contact List</h1>
         <a data-icon="plus" data-role="button" href="#newContact">Add</a>
     </header>
@@ -23,7 +23,7 @@
             <!--<input id="input" class="search-bar" type="text" placeholder="Search" onkeyup="filterContacts()">
             <br>-->
             <ul id="contacts-list" data-role="listview" data-filter="true" data-inset="true" data-autodividers="true"
-                data-icon ="phone" data-split-icon="phone" data-split-theme="a">
+                data-icon="phone" data-split-icon="phone" data-split-theme="a">
 
             </ul>
         </div>
@@ -36,7 +36,7 @@
 </section>
 
 <section data-role="page" id="contactInfo">
-    <div data-role="header">
+    <div data-role="header" style="background-color: bisque">
         <a data-icon="back" data-role="button" href="#contact-list">back</a>
 
         <h1 id="userNameHeader"></h1>
@@ -72,10 +72,10 @@
 
 <section data-add-back-btn="true" data-dialog="true" data-role="page" id="newContact">
 
-    <a href="#contactInfo">Go to contactInfo</a>
-    <a href="#deletePage">Go to deletePage</a>
-    <header data-role="header">
-        <h1 id ="editHeader"> New Contact</h1>
+    <!--    <a href="#contactInfo">Go to contactInfo</a>-->
+    <!--    <a href="#deletePage">Go to deletePage</a>-->
+    <header data-role="header" style="background-color: bisque">
+        <h1 id="editHeader" style="color: darkgreen"> New Contact</h1>
     </header>
     <br>
 
